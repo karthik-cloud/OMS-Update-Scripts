@@ -1,0 +1,15 @@
+sudo apt-get purge -y walinuxagent
+sudo apt-get install walinuxagent
+sudo sed -i $autoupdate
+VER=$(cat /etc/issue.net)
+if [[ "$VER" == "Ubuntu 14"* ]]; then 
+$sudo initctl restart walinuxagent
+else 
+$sudo systemctl restart walinuxagent.service
+fi
+$sudo sh omsagent-*.universal.x64.sh –purge
+url=https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+wsId=22cce6bf-28ae-4bf5-9da1-a55399478a02
+wsKey=/4AsuiXs7Vj0WUpHOeygv6yNxi0NX8FlAvjtmWcd3rDt4eMtJJcpFDx66/h5mynDCKrBDcJw8H0tpGTOGmgwSw==
+wget $url && sh onboard_agent.sh -w $wsId -s $wsKey
+dpkg -s omsagent

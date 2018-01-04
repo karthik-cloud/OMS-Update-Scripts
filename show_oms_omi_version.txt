@@ -1,0 +1,11 @@
+ver=$(dpkg -s omsagent)
+ver=$(echo $ver | grep -o -P '(?<=Version:).*(?=Provides:)')
+echo "OMS Version ======>>>>>> $ver"
+ver=$(dpkg -s omi)
+ver=$(echo $ver | grep -o -P '(?<=Version:).*(?=Provides:)')
+echo "OMI Version ======>>>>>> $ver"
+
+
+
+
+

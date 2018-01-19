@@ -1,5 +1,7 @@
 wget https://github.com/Microsoft/omi/releases/download/v1.4.1-0/omi-1.4.1-0.ssl_100.ulinux.x64.deb
 sudo dpkg -i omi-1.4.1-0.ssl_100.ulinux.x64.deb
-sudo service omsagent-22cce6bf-28ae-4bf5-9da1-a55399478a02 restart
+#sudo service omsagent-22cce6bf-28ae-4bf5-9da1-a55399478a02 restart
+OMSAGENTSERVICE=$(sudo service --status-all | grep -i "omsagent*" | awk '{ print $4}')
+sudo service $OMSAGENTSERVICE restart
 dpkg -s omi
-sudo service omsagent-22cce6bf-28ae-4bf5-9da1-a55399478a02 status
+sudo service $OMSAGENTSERVICE status
